@@ -120,13 +120,14 @@ font4 = ImageFont.truetype("/home/pi/terminal_tedium/tt-fonts/Roboto-Bold.ttf",1
 font5 = ImageFont.truetype("/home/pi/terminal_tedium/tt-fonts/Roboto-Light.ttf",10)
 font6 = ImageFont.truetype("/home/pi/terminal_tedium/tt-fonts/Roboto-Light.ttf",12)
 
-draw.rectangle((0,0,width,height), outline=0, fill=255)
-draw.text((x, top+15)," tt-EBS",  font=font3, fill=0)
+draw.rectangle((0,0,width,height), outline=0, fill=0)
+draw.rectangle((1,0,127,63), outline=1, fill=0)
+draw.text((5, top+20),"   Launch TT-EBS.pd",  font=font1, fill=255)
 draw.text((x, top+35),"  Euclidian Beat Slicer",  font=font2, fill=0)
 #disptop.image(image)
 disptop.display(image)
 
-time.sleep(2)
+time.sleep(1)
 
 sys.stdin.flush()
 TT = sys.stdin.readline()
@@ -162,13 +163,13 @@ while True:
         time.sleep(3)
         exestring = "sudo shutdown -h now"
         print (exestring)
-        disptop.cleanum
         os.system(exestring)
+	disptop.cleanum
     elif (TT[0:8] == 'print: q'):#long press up button
 
         draw.rectangle((0,0,width,height), outline=0, fill=0)
         draw.rectangle((1,0,127,63), outline=1, fill=0)
-        draw.text((5, top+20),"Launching Patch Loader",  font=font1, fill=255)
+        draw.text((5, top+20),"  Launch Patch Loader",  font=font1, fill=255)
         disptop.display(image)
         time.sleep(1)
         exestring = "sudo killall -9 pd python ; sudo python /home/pi/terminal_tedium/tt-loader.py"

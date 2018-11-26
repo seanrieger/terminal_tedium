@@ -55,7 +55,7 @@ line3 = str()
 line4 = str()
 data = str()
 knobnames = list()
-knobnames = ['k1','k2','k3','k4','k5','k6']
+knobnames = ['K1','k2','k3','k4','k5','k6']
 header = 11
 #data = "0: 16 15 15 16 16 15 16 15 16 16 15 16"
 #data = data[3: ]
@@ -126,15 +126,13 @@ font = ImageFont.load_default()
 font1 = ImageFont.truetype("/home/pi/terminal_tedium/tt-fonts/Roboto-Light.ttf",12)
 font2 = ImageFont.truetype("/home/pi/terminal_tedium/tt-fonts/Roboto-Light.ttf",14)
 font3 = ImageFont.truetype("/home/pi/terminal_tedium/tt-fonts/Roboto-Bold.ttf",24)
+font4 = ImageFont.truetype("/home/pi/terminal_tedium/tt-fonts/Roboto-Light.ttf",11)
 font4 = ImageFont.truetype("/home/pi/terminal_tedium/tt-fonts/Roboto-Light.ttf",10)
-font5 = ImageFont.truetype("/home/pi/terminal_tedium/tt-fonts/Roboto-Light.ttf",11)
 
-#New code
-drawtop.rectangle((0,0,width,height), outline=0, fill=0)
-drawtop.rectangle((1,0,127,63), outline=1, fill=0)
-drawtop.text((5, top+20),"  Launch TT-Testpanel",  font=font5, fill=255)
+drawtop.rectangle((0,0,width,height), outline=0, fill=brite)
+drawtop.text((x, top+20),"   tt-Basil",  font=font2, fill=0)
 disptop.display(image_top)
-time.sleep(1)
+#time.sleep(2)
 
 sys.stdin.flush()
 TT = sys.stdin.readline()
@@ -151,7 +149,7 @@ TT.strip()
 line=' '
 t0=time.time()
 while True:
-#    sleep(2.1)
+#    sleep(0.1)
 #    sys.stdin.flush()
 #    for line in sys.stdin:
 #        TT = line
@@ -162,15 +160,7 @@ while True:
         TT=line
         TT.strip()
         t0=ticks
-        #old code
-        #if (TT[0:6] == 'OLED Q'):# long press down button   
-            #drawtop.rectangle((0,0,width,height), outline=0, fill=brite)
-            #drawtop.text((x, top+1),"SHUTDOWN",  font=font2, fill=0)
-            #disptop.display(image_top)
-            #exestring = "sudo shutdown -h now"
-            #print (exestring)
-            #disptop.cleanum
-            #os.system(exestring)
+
 
         #new code
 	if (TT[0:6] == 'OLED Q'):# long press down button  
@@ -183,21 +173,19 @@ while True:
             exestring = "sudo shutdown -h now"
             print (exestring)
             os.system(exestring)
-            drawtop.rectangle((0,0,width,height), outline=0, fill=0)
+	    disptop.clean
 
 
         elif (TT[0:6] == 'OLED q'):# long press up button   
-            #New code
-	    drawtop.rectangle((0,0,width,height), outline=0, fill=0)
-	    drawtop.rectangle((1,0,127,63), outline=1, fill=0)
-            drawtop.text((5, top+20),"  Launch Patch Loader",  font=font5, fill=255)
+            drawtop.rectangle((0,0,width,height), outline=0, fill=brite)
+            drawtop.text((x+16, top+16),"PATCHLOADER",  font=font2, fill=0)
             disptop.display(image_top)
             time.sleep(1)
-            exestring = "sudo killall -9 pd python;sudo python /home/pi/terminal_tedium/tt-loader.py"
+            exestring = "sudo killall -9 pd python; sleep 1; sudo python /home/pi/terminal_tedium/tt-loader.py"
             print (exestring)
             os.system(exestring)        
-      
-    #OLED labels: LD1 LD2 FdBk RD1 RD2 BPM    #012345678901    
+    #OLED labels: LD1 LD2 FdBk RD1 RD2 BPM
+    #012345678901    
         elif (TT[0:10] == 'knobnames:'):
             data = TT[11: ]
             data.rstrip("\n\r")
@@ -228,27 +216,27 @@ while True:
             
 	# knob1
 	    drawtop.text((x+2, top+18), str('{:01.2f}'.format(K1)),  font=font1, fill=brite)
-            drawtop.text((x+2, top+2), knobnames[0], font=font5, fill=0)            
+            drawtop.text((x+2, top+2), knobnames[0], font=font4, fill=0)            
             
 	# knob2
 	    drawtop.text((46, top+18), str('{:01.2f}'.format(K2)),  font=font1, fill=brite)
-            drawtop.text((46, top+2), knobnames[1], font=font5, fill=0)            
+            drawtop.text((46, top+2), knobnames[1], font=font4, fill=0)            
             
 	# knob3
 	    drawtop.text((88, top+18), str('{:01.2f}'.format(K3)),  font=font1, fill=brite)
-            drawtop.text((88, top+2), knobnames[2], font=font5, fill=0)            
+            drawtop.text((88, top+2), knobnames[2], font=font4, fill=0)            
             
 	# knob4
 	    drawtop.text((x+2, top+38), str('{:01.2f}'.format(K4)),  font=font1, fill=brite)
-            drawtop.text((x+2, top+54), knobnames[3], font=font5, fill=0)            
+            drawtop.text((x+2, top+54), knobnames[3], font=font4, fill=0)            
             
 	# knob5
 	    drawtop.text((46, top+38), str('{:01.2f}'.format(K5)),  font=font1, fill=brite)
-            drawtop.text((46, top+54), knobnames[4],  font=font5, fill=0)            
+            drawtop.text((46, top+54), knobnames[4],  font=font4, fill=0)            
             
 	# knob6
 	    drawtop.text((88, top+38), str('{:01.2f}'.format(K6)),  font=font1, fill=brite)
-            drawtop.text((88, top+54), knobnames[5],  font=font5, fill=0)            
+            drawtop.text((88, top+54), knobnames[5],  font=font4, fill=0)            
             
 	# Right Hand Side Vertical Bars
 	    drawtop.rectangle((117,48,118,(48-K9)),outline=brite, fill=brite)

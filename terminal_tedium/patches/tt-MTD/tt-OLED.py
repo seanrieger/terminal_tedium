@@ -139,6 +139,7 @@ while True:
     sys.stdin.flush()
     TT = sys.stdin.readline()
     TT.strip()
+
     if (TT[0:6] == 'OLED Q'):# long press down button   
         drawtop.rectangle((0,0,width,height), outline=0, fill=0)
         drawtop.text((x, top+15),"Shutting Down Pi",  font=font2, fill=255)
@@ -148,8 +149,8 @@ while True:
         time.sleep(3)
         exestring = "sudo shutdown -h now"
         print (exestring)
-        disptop.cleanum
         os.system(exestring)
+	disptop.clean
     elif (TT[0:6] == 'OLED q'):# long press up button   
         
         drawtop.rectangle((0,0,width,height), outline=0, fill=0)
